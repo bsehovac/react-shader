@@ -1,5 +1,9 @@
 {
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    "jsx-quotes": [1, "prefer-double"],
   }
 }

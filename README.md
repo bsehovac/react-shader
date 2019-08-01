@@ -10,6 +10,12 @@
 npm install --save react-shader
 ```
 
+or
+
+```bash
+yarn add react-shader
+```
+
 ## Usage
 
 ```jsx
