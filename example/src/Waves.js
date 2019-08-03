@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Shader, Uniform, Attribute, Camera, Texture } from 'react-shader'
 
-const glsl = x => x
+const glsl = x => x[0]
 
 const vertex = glsl`
   #define M_PI 3.1415926535897932384626433832795
@@ -28,8 +28,8 @@ const vertex = glsl`
       sin(pos.z / u_field.z * M_PI * 8.0 + u_time * u_speed)
     ) * u_field.y;
 
-    gl_Position = u_projection * vec4( pos.xyz, a_position.w );
-    gl_PointSize = ( u_size / gl_Position.w ) * 100.0;
+    gl_Position = u_projection * vec4(pos.xyz, a_position.w);
+    gl_PointSize = (u_size / gl_Position.w) * 100.0;
 
     v_color = a_color;
   }`

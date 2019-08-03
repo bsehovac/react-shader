@@ -17,6 +17,7 @@ const Shader = ({
   const [gl, setGl] = useState(null)
   const [program, setProgram] = useState(null)
   const [count, setCount] = useState(0)
+  const [stage, setStage] = useState({ width: 0, height: 0 })
 
   useEffect(() => {
     const gl = canvas.current.getContext('webgl', { antialias })
@@ -79,14 +80,17 @@ const Shader = ({
     const onShaderResize = () => {
       const dpi = window.devicePixelRatio
       const { offsetWidth, offsetHeight } = wrapper.current
+      const width = offsetWidth * dpi
+      const height = offsetHeight * dpi
 
-      canvas.current.width = offsetWidth * dpi
-      canvas.current.height = offsetHeight * dpi
+      canvas.current.width = width
+      canvas.current.height = height
 
-      gl.viewport(0, 0, offsetWidth * dpi, offsetHeight * dpi)
+      gl.viewport(0, 0, width, height)
       gl.clearColor(0, 0, 0, 0)
 
       onResize(offsetWidth, offsetHeight, dpi)
+      setStage({ width, height })
     }
     onShaderResize()
 
@@ -98,7 +102,7 @@ const Shader = ({
     <div ref={wrapper} style={{ ...style }} className={className}>
       <canvas ref={canvas} style={{ display: 'block', width: '100%', height: '100%' }} />
       {gl !== null && program !== null && React.Children.map(children, child =>
-        React.cloneElement(child, { gl, program, setCount })
+        React.cloneElement(child, { gl, program, stage, setCount })
       )}
     </div>
   )

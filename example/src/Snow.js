@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 
 import { Shader, Uniform, Attribute, Camera, Texture } from 'react-shader'
 
-const glsl = x => x
+const glsl = x => x[0]
 
 const vertex = glsl`
   precision highp float;

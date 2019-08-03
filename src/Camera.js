@@ -10,15 +10,13 @@ const Camera = ({
   target,
   perspective,
   gl,
-  program
+  program,
+  stage: { width, height }
 }) => {
   const [projection, setProjection] = useState(Array.from({ length: 16 }))
 
   useEffect(() => {
-    const { canvas } = gl
-    const { clientWidth: width, clientHeight: height } = canvas
-
-    const options = {
+    setProjection(createProjection({
       width,
       height,
       perspective,
@@ -27,10 +25,8 @@ const Camera = ({
       far,
       position,
       target
-    }
-
-    setProjection(createProjection(options))
-  }, [fov, near, far, position, perspective])
+    }))
+  }, [fov, near, far, position, perspective, width, height])
 
   return (
     <Uniform name="u_projection" type="mat4" value={projection} gl={gl} program={program} />
@@ -43,7 +39,10 @@ Camera.propTypes = {
   far: PropTypes.number,
   position: PropTypes.array,
   target: PropTypes.array,
-  perspective: PropTypes.bool
+  perspective: PropTypes.bool,
+  gl: PropTypes.any,
+  program: PropTypes.any,
+  stage: PropTypes.object
 }
 
 Camera.defaultProps = {
