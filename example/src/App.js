@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react'
 import Waves from './Waves'
 import Snow from './Snow'
 import Stars from './Stars'
+import Sphere from './Sphere'
 
 const App = () => {
   const [component, setComponent] = useState(<Stars />)
@@ -18,6 +19,9 @@ const App = () => {
         </button>
         <button onClick={() => setComponent(<Snow />)}>
           Snow
+        </button>
+        <button onClick={() => setComponent(<Sphere />)}>
+          Sphere
         </button>
       </div>
       {component}

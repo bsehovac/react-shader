@@ -1,24 +1,3 @@
-# react-shader
-
-> 
-
-[![NPM](https://img.shields.io/npm/v/react-shader.svg)](https://www.npmjs.com/package/react-shader) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
-## Install
-
-```bash
-npm install --save react-shader
-```
-
-or
-
-```bash
-yarn add react-shader
-```
-
-## Usage
-
-```jsx
 import React, { useState, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -42,7 +21,7 @@ const vertex = `
     pos.z = a_position.x * sin(a) + a_position.z * cos(a);
 
     gl_Position = u_projection * vec4(pos.xyz, a_position.w);
-    gl_PointSize = (5.0 * ${devicePixelRatio}.0 / gl_Position.w) * 100.0;
+    gl_PointSize = (5.0 / gl_Position.w) * 100.0;
 
     v_color = vec4(0.0, (pos.z + 30.0) / 60.0, 1.0, 1.0);
   }
@@ -78,7 +57,7 @@ const Demo = () => {
 
   const onUpdate = (delta, elapsed) => setElapsed(elapsed)
 
-  const style = { position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', backgroundColor: '#000' }
+  const style = { position: 'absolute', width: '100%', height: '100%' }
 
   return (
     <Shader vertex={vertex} fragment={fragment} onUpdate={onUpdate} style={style}>
@@ -89,9 +68,4 @@ const Demo = () => {
   )
 }
 
-ReactDOM.render(<Demo />, document.getElementById('root'))
-```
-
-## License
-
-MIT © [bsehovac](https://github.com/bsehovac)
+export default Demo
